@@ -8,19 +8,20 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-// add methods to use with books --> one instance of function shared b/t all books vs. the individual values are different for the properties in Book class above (and need to be set upon book creation)
-Book.prototype.toggleRead = function () {
-  this.isRead = true;
-};
+// NEED A WAY TO ADD MULTIPLE METHODS TO Book.prototype --> use class Book & constructor ES6???
+// stackoverflow.com/questions/40337873/adding-multiple-methods-to-a-javascript-prototype
 
-// date added func?
-
-// book progress % calc
-Book.prototype.getProgress = function (page) {
-  if (this.isRead) {
-    this.progress = 100;
-  } else {
-    this.progress = (page / this.pages) * 100;
+Book.prototype = {
+  constructor: Book,
+  toggleRead: function () {
+    this.isRead = !this.isRead;
+  },
+  getProgress: function (page) {
+    if (this.isRead) {
+      this.progress = 100;
+    } else {
+      this.progress = parseInt((page / this.pages) * 100); // this seems to round down
+    }
   }
 };
 
@@ -41,8 +42,5 @@ function displayBooks() {}
 
 document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log("did this run");
   addBookToLibrary();
 });
-
-console.log(document.querySelector('button[type="submit"'));
