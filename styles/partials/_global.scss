@@ -1,0 +1,81 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Lato", sans-serif;
+}
+
+.wrapper {
+  //padding: 0 $padding;
+  width: calc(100% - #{$padding} * 2);
+  margin: 0 auto;
+}
+
+ul,
+li {
+  list-style: none;
+  padding-left: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: "Itim", cursive;
+  display: inline-block;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 65%;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+  }
+}
+
+nav {
+  text-align: center;
+
+  a {
+    margin: 0 10px;
+  }
+}
+
+section {
+  margin: 20px 0;
+}
+
+.form {
+  background-color: white;
+}
+
+.card {
+  padding: $padding;
+  background-color: #eee;
+  border-radius: $border-radius;
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  &__pages {
+    font-style: italic;
+  }
+}
+
+footer {
+  text-align: center;
+}

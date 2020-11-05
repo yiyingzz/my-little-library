@@ -4,49 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>my little library</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
     <header>
-      <h1>my little library</h1>
+      <div class="wrapper">
+        <h1>my little library</h1>
+      </div>
     </header>
 
     <main>
-      <section id="form">
-        <form action="#">
-          <label for="title">Title</label>
-          <input type="text" name="title" />
-          <label for="author">Author</label>
-          <input type="text" name="author" />
-          <label for="pages">Number of pages</label>
-          <input type="text" name="pages" />
-          <label for="progress">Progress</label>
-          <input type="checkbox" name="progress" />
-          <button type="submit">Add Book</button>
-        </form>
-      </section>
+      <div class="wrapper">
+        <nav>
+          <a href="javascript:void(0)">Reading</a>
+          <a href="javascript:void(0)">Read</a>
+          <a
+            href="javascript:void(0)"
+            aria-expanded="false"
+            aria-label="Add new book"
+            class="form-section__add"
+          >
+            &plus;
+          </a>
+        </nav>
+        <section id="form-section" class="form-section">
+          <form action="#" class="form">
+            <div class="form__set">
+              <label for="title">Title</label>
+              <input type="text" name="title" />
+            </div>
+            <div class="form__set">
+              <label for="author">Author</label>
+              <input type="text" name="author" />
+            </div>
+            <div class="form__set">
+              <label for="pages">Number of pages</label>
+              <input type="text" name="pages" />
+            </div>
+            <div class="form__set">
+              <label for="progress">Progress</label>
+              <input type="checkbox" name="progress" />
+            </div>
+            <button type="submit">Add Book</button>
+          </form>
+        </section>
 
-      <section id="list">
-        <ul id="reading">
-          <li>
-            <h2>The Handmaid's Tale</h2>
-            <p>Margaret Atwood</p>
-            <p>200 pages</p>
-            <p>progress: %</p>
-          </li>
-        </ul>
-        <ul id="complete">
-          <li>
-            <h2>The Handmaid's Tale</h2>
-            <p>Margaret Atwood</p>
-            <p>200 pages</p>
-            <p>rating: 5 stars</p>
-          </li>
-        </ul>
-      </section>
+        <section id="list" class="list">
+          <ul id="reading">
+            <li class="card">
+              <h2 class="card__title">
+                The Handmaid's Tale or a really really really long title
+              </h2>
+              <p class="card__author">Margaret Atwood</p>
+              <p class="card__pages">200 pages</p>
+              <p class="card__progress">incomplete</p>
+            </li>
+          </ul>
+          <ul id="complete">
+            <li class="card">
+              <h2 class="card__title">The Handmaid's Tale</h2>
+              <p class="card__author">Margaret Atwood</p>
+              <p class="card__pages">200 pages</p>
+              <p class="card__progress">read</p>
+            </li>
+          </ul>
+        </section>
+      </div>
     </main>
 
-    <footer>made by yiying</footer>
+    <footer class="wrapper">made by yiying</footer>
     <script src="./script.js"></script>
   </body>
 </html>
