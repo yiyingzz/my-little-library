@@ -321,10 +321,32 @@ nav {
 
 nav a {
   margin: 0 10px;
+  display: inline-block;
+  border-radius: 15px;
+  border: 2px solid black;
+  color: black;
+  padding: 2px 5px;
+  text-decoration: none;
+}
+
+nav a.nav__add {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+nav a--active {
+  background: black;
+  color: white;
 }
 
 section {
   margin: 20px 0;
+}
+
+footer {
+  text-align: center;
 }
 
 .form {
@@ -335,6 +357,11 @@ section {
   padding: 16px;
   background-color: #eee;
   border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.card:last-of-type {
+  margin-bottom: 0;
 }
 
 .card h2 {
@@ -347,8 +374,4 @@ section {
 
 .card__pages {
   font-style: italic;
-}
-
-footer {
-  text-align: center;
 }

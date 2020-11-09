@@ -8,7 +8,6 @@ body {
 }
 
 .wrapper {
-  //padding: 0 $padding;
   width: calc(100% - #{$padding} * 2);
   margin: 0 auto;
 }
@@ -47,33 +46,29 @@ nav {
 
   a {
     margin: 0 10px;
+    display: inline-block;
+    border-radius: 15px;
+    border: 2px solid black;
+    color: black;
+    padding: 2px 5px;
+    text-decoration: none;
+
+    &.nav__add {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    &--active {
+      background: black;
+      color: white;
+    }
   }
 }
 
 section {
   margin: 20px 0;
-}
-
-.form {
-  background-color: white;
-}
-
-.card {
-  padding: $padding;
-  background-color: #eee;
-  border-radius: $border-radius;
-
-  h2 {
-    margin: 0;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-
-  &__pages {
-    font-style: italic;
-  }
 }
 
 footer {

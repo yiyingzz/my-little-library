@@ -1,0 +1,22 @@
+.card {
+  padding: $padding;
+  background-color: #eee;
+  border-radius: $border-radius;
+  margin-bottom: $padding;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  &__pages {
+    font-style: italic;
+  }
+}
