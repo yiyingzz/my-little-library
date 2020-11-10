@@ -293,7 +293,8 @@ li {
 
 header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  height: 80px;
 }
 
 h1 {
@@ -336,7 +337,7 @@ nav a.nav__add {
   font-weight: bold;
 }
 
-nav a--active {
+nav a.active {
   background: black;
   color: white;
 }
@@ -345,12 +346,18 @@ section {
   margin: 20px 0;
 }
 
+main {
+  height: calc(100vh - 96px - 22px);
+}
+
 footer {
   text-align: center;
+  height: 22px;
 }
 
 .form {
   background-color: white;
+  display: none;
 }
 
 .card {

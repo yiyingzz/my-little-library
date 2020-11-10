@@ -20,7 +20,8 @@ li {
 
 header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: $padding;
+  height: 80px;
 }
 
 h1 {
@@ -60,7 +61,7 @@ nav {
       font-weight: bold;
     }
 
-    &--active {
+    &.active {
       background: black;
       color: white;
     }
@@ -71,6 +72,11 @@ section {
   margin: 20px 0;
 }
 
+main {
+  height: calc(100vh - 96px - 22px);
+}
+
 footer {
   text-align: center;
+  height: 22px;
 }

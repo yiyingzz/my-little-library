@@ -34,6 +34,8 @@ function addBookToLibrary() {
   const progress = document.querySelector('input[name="progress"]').checked;
   const newBook = new Book(title, author, pages, progress);
   library.push(newBook);
+  // add to localStorage
+  localStorage.setItem("books", JSON.stringify(library));
   displayBooks();
 }
 
@@ -101,3 +103,36 @@ function attachToggleReadEventListener() {
     });
   });
 }
+
+document.querySelector(".nav__reading").addEventListener("click", function () {
+  this.classList.add("active");
+  document.querySelector(".nav__read").classList.remove("active");
+  document.querySelector(".nav__add").classList.remove("active");
+  document.getElementById("reading").style.display = "block";
+  document.getElementById("read").style.display = "none";
+  document.querySelector(".form").style.display = "none";
+});
+
+document.querySelector(".nav__read").addEventListener("click", function () {
+  this.classList.add("active");
+  document.querySelector(".nav__reading").classList.remove("active");
+  document.querySelector(".nav__add").classList.remove("active");
+  document.getElementById("read").style.display = "block";
+  document.getElementById("reading").style.display = "none";
+  document.querySelector(".form").style.display = "none";
+});
+
+document.querySelector(".nav__add").addEventListener("click", function () {
+  this.classList.add("active");
+  document.querySelector(".nav__read").classList.remove("active");
+  document.querySelector(".nav__reading").classList.remove("active");
+  document.querySelector(".form").style.display = "block";
+});
+
+//onload
+document.addEventListener("DOMContentLoaded", function () {
+  if (0 < localStorage.length) {
+    library = JSON.parse(localStorage.getItem("books"));
+    displayBooks();
+  }
+});
