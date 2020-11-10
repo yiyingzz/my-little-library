@@ -34,20 +34,19 @@ function addBookToLibrary() {
   const progress = document.querySelector('input[name="progress"]').checked;
   const newBook = new Book(title, author, pages, progress);
   library.push(newBook);
-  console.log(library);
   displayBooks();
 }
 
 // display books
 function displayBooks() {
   // grab ul (depend on reading or read)
-  let ul = "";
   // need to clear the ul first otherwise just keeps adding
   document.getElementById("read").innerHTML = "";
   document.getElementById("reading").innerHTML = "";
 
   // loop through library obj
-  library.forEach((book) => {
+  library.forEach((book, index) => {
+    let ul = "";
     readInfo = "";
     if (book.isRead) {
       readInfo = "read";
@@ -65,6 +64,7 @@ function displayBooks() {
       `;
     const li = document.createElement("li");
     li.setAttribute("class", "card");
+    li.setAttribute("id", index);
     const h2 = document.createElement("h2");
     h2.setAttribute("class", "card__title");
     h2.innerText = book.title;
@@ -82,10 +82,22 @@ function displayBooks() {
     li.append(pProgress);
     ul.append(li);
   });
-  //ul.innerHTML = html
+  attachToggleReadEventListener();
 }
 
 document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
   addBookToLibrary();
 });
+
+function attachToggleReadEventListener() {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    card.addEventListener("click", function (e) {
+      if (e.target.className === "card__progress") {
+        library[e.currentTarget.id].toggleRead();
+        displayBooks();
+      }
+    });
+  });
+}
