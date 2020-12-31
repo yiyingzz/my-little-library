@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+$border-radius: 12px;
+$padding: 16px;
+
+// Media query mixins
+
+@mixin mq($breakpoint) {
+  $phone: "(max-width: 600px)";
+  $tablet: "(min-width: 650px)";
+  $desktop: "(min-width: 790px)";
+
+  @if $breakpoint == phone {
+    @media #{$phone} {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media #{$tablet} {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media #{$desktop} {
+      @content;
+    }
+  }
+}

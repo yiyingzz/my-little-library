@@ -16,13 +16,6 @@ Book.prototype = {
   toggleRead: function () {
     this.isRead = !this.isRead;
   }
-  // getProgress: function (page) {
-  //   if (this.isRead) {
-  //     this.progress = 100;
-  //   } else {
-  //     this.progress = parseInt((page / this.pages) * 100); // this seems to round down
-  //   }
-  // }
 };
 
 // this function gets called after user fills out inputs to add new book info (title, author, etc)
@@ -77,6 +70,7 @@ function displayBooks() {
     li.append(pAuthor);
     const pPages = document.createElement("p");
     pPages.setAttribute("class", "card__pages");
+    pPages.innerText = book.pages + " pages";
     li.append(pPages);
     const pProgress = document.createElement("p");
     pProgress.setAttribute("class", "card__progress");
@@ -104,6 +98,7 @@ function attachToggleReadEventListener() {
   });
 }
 
+// rewrite below as one named function that is an evt listener, attach to all 3 nav links, function needs to take in parameter (event, use event target class/id to decide what to show/hide)
 document.querySelector(".nav__reading").addEventListener("click", function () {
   this.classList.add("active");
   document.querySelector(".nav__read").classList.remove("active");
@@ -132,7 +127,16 @@ document.querySelector(".nav__add").addEventListener("click", function () {
 //onload
 document.addEventListener("DOMContentLoaded", function () {
   if (0 < localStorage.length) {
-    library = JSON.parse(localStorage.getItem("books"));
+    libraryData = JSON.parse(localStorage.getItem("books"));
+    library = libraryData.map((item) => {
+      const book = new Book(item.title, item.author, item.pages, item.progress);
+      return book;
+    });
     displayBooks();
   }
 });
+
+// NOTES:
+// need form error handling
+// if title & author exact match for something already in library[], "do you already have this book on your list?" --> parse title & author in lower case to check for matches
+// add delete button to delete books

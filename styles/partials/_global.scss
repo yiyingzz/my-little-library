@@ -20,7 +20,7 @@ li {
 
 header {
   text-align: center;
-  margin-bottom: $padding;
+  margin-bottom: 8px;
   height: 80px;
 }
 
@@ -70,10 +70,6 @@ nav {
 
 section {
   margin: 20px 0;
-}
-
-main {
-  height: calc(100vh - 96px - 22px);
 }
 
 footer {

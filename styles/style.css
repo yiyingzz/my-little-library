@@ -293,7 +293,7 @@ li {
 
 header {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   height: 80px;
 }
 
@@ -346,10 +346,6 @@ section {
   margin: 20px 0;
 }
 
-main {
-  height: calc(100vh - 96px - 22px);
-}
-
 footer {
   text-align: center;
   height: 22px;
@@ -365,6 +361,12 @@ footer {
   background-color: #eee;
   border-radius: 12px;
   margin-bottom: 16px;
+}
+
+@media (min-width: 650px) {
+  .card {
+    width: 300px;
+  }
 }
 
 .card:last-of-type {
