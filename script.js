@@ -2,6 +2,13 @@ let library = [];
 let activeView = ""; // default is all for desktop, reading for mobile
 
 const form = document.querySelector("form");
+const formLink = document.querySelector(".nav__link--add");
+const reading = document.querySelector("#reading");
+const readingLink = document.querySelector(".nav__link--reading");
+const read = document.querySelector("#read");
+const readLink = document.querySelector(".nav__link--read");
+const all = document.querySelector("#all");
+const allLink = document.querySelector(".nav__link--all");
 
 //set up book class
 function Book(title, author, pages, isRead) {
@@ -132,13 +139,16 @@ function determineView(e) {
     toggleForm();
   } else {
     showCategory(e.target.dataset.view);
+    console.log("determine");
+    console.log(activeView);
     activeView = e.target;
   }
   const nav = document.getElementsByClassName("nav__link");
   for (let item of nav) {
     item.classList.remove("active");
   }
-  e.target.classList.add("active");
+  e.target.classList.add("active"); // clicking on form link to close causes this to activate
+  // check if form & if form link is already active, if it is, remove
 }
 
 // this should be a function that runs through the library array and displays the matching category, so the default will always be "all"
@@ -158,6 +168,8 @@ function toggleForm() {
     form.style.display = "none";
     document.querySelector(".nav__link--add").classList.remove("active");
     activeView.classList.add("active");
+    console.log("toggleform");
+    console.log(activeView);
   } else {
     form.style.display = "block";
   }
@@ -184,6 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     displayBooks();
     // set activeView here (default on load)
+    activeView = readingLink;
+    readingLink.classList.add("active");
   }
 });
 

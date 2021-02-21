@@ -28,7 +28,6 @@ $color-card: $white;
 $color-bg: $lightBlue;
 $color-shadow: $mediumBlue;
 $color-text: $blueGrey;
-
 $color-reading: $pink;
 $color-read: $darkGreen;
 
@@ -40,8 +39,8 @@ $drop-shadow: drop-shadow(
 // Media query mixins
 
 @mixin mq($breakpoint) {
-  $phone: "(max-width: 789px)";
-  $tablet: "(min-width: 790px)";
+  $phone: "(max-width: 759px)";
+  $tablet: "(min-width: 760px)";
   $desktop: "(min-width: 1025px)";
 
   @if $breakpoint == phone {
