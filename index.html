@@ -15,58 +15,110 @@
 
     <main>
       <div class="wrapper">
-        <nav>
-          <a href="javascript:void(0)" class="nav__reading">Reading</a>
-          <a href="javascript:void(0)" class="nav__read">Read</a>
+        <nav class="nav">
           <a
-            href="javascript:void(0)"
+            href="javascript:void(0);"
+            data-view="reading"
+            class="nav__link nav__link--reading"
+            >Reading</a
+          >
+          <a
+            href="javascript:void(0);"
+            data-view="read"
+            class="nav__link nav__link--read"
+            >Read</a
+          >
+          <a
+            href="javascript:void(0);"
+            data-view="all"
+            class="nav__link nav__link--all"
+            >View All</a
+          >
+          <a
+            href="javascript:void(0);"
             aria-expanded="false"
             aria-label="Add new book"
-            class="nav__add"
+            data-view="add"
+            class="nav__link nav__link--add"
           >
             &plus;
           </a>
         </nav>
+
         <section id="form-section" class="form-section">
           <form action="#" class="form">
-            <div class="form__set">
-              <label for="title">Title</label>
-              <input type="text" name="title" />
+            <a href="javascript:void(0);" class="form__close">
+              <img
+                src="./assets/times-solid.svg"
+                class="form__close--icon"
+                alt="Close form"
+              />
+            </a>
+
+            <div class="form__wrapper">
+              <div class="form__set">
+                <label for="title" class="form__label">Title</label>
+                <input type="text" class="form__input" name="title" />
+              </div>
+              <div class="form__set">
+                <label for="author" class="form__label">Author</label>
+                <input type="text" class="form__input" name="author" />
+              </div>
+              <div class="form__set">
+                <label for="pages" class="form__label">Number of pages</label>
+                <input type="text" class="form__input" name="pages" />
+              </div>
+              <div class="form__set">
+                <label for="progress" class="form__label form__label--checkbox"
+                  >Finished reading?</label
+                >
+                <input
+                  type="checkbox"
+                  class="form__input form__input--checkbox"
+                  name="progress"
+                />
+              </div>
+
+              <button type="submit" class="form__button">Add Book</button>
             </div>
-            <div class="form__set">
-              <label for="author">Author</label>
-              <input type="text" name="author" />
-            </div>
-            <div class="form__set">
-              <label for="pages">Number of pages</label>
-              <input type="text" name="pages" />
-            </div>
-            <div class="form__set">
-              <label for="progress">Progress</label>
-              <input type="checkbox" name="progress" />
-            </div>
-            <button type="submit">Add Book</button>
           </form>
         </section>
 
         <section id="list" class="list">
-          <ul id="reading">
+          <ul id="reading" class="category">
             <!-- <li class="card">
-              <h2 class="card__title">
-                The Handmaid's Tale or a really really really long title
-              </h2>
+              <div class="card__border"></div>
+              <div class="card__heading">
+                <h2 class="card__title">
+                  The Handmaid's Tale or a really really really long title
+                </h2>
+                <div class="card__edit">
+                  <img
+                    src="./assets/two-dots.svg"
+                    class="card__edit--icon"
+                    alt="Edit book info"
+                  />
+                </div>
+              </div>
               <p class="card__author">Margaret Atwood</p>
-              <p class="card__pages">200 pages</p>
-              <p class="card__progress">incomplete</p>
+              <p class="card__pages">Length: 200 pages</p>
+              <p class="card__progress">Status: Incomplete</p>
             </li> -->
           </ul>
-          <ul id="read">
-            <!-- <li class="card">
-              <h2 class="card__title">The Handmaid's Tale</h2>
+          <ul id="read" class="category">
+            <li class="card">
+              <div class="card__border card__border--read"></div>
+              <div class="card__heading">
+                <h2 class="card__title">The Handmaid's Tale</h2>
+                <div class="card__edit"></div>
+              </div>
               <p class="card__author">Margaret Atwood</p>
               <p class="card__pages">200 pages</p>
               <p class="card__progress">read</p>
-            </li> -->
+            </li>
+          </ul>
+          <ul id="all" class="category">
+            // all books
           </ul>
         </section>
       </div>

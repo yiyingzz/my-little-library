@@ -1,26 +1,71 @@
-.card {
-  padding: $padding;
-  background-color: #eee;
-  border-radius: $border-radius;
-  margin-bottom: $padding;
+.category {
+  display: grid;
+  grid-gap: $padding-regular;
 
   @include mq(tablet) {
-    width: 300px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 
-  &:last-of-type {
-    margin-bottom: 0;
+  @include mq(desktop) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+.card {
+  padding: $padding-regular;
+  padding-top: $padding-regular + $padding-small;
+  background-color: $color-card;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  overflow: hidden;
+  position: relative;
+  filter: $drop-shadow;
+
+  &__border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: $color-reading;
+
+    &--read {
+      background-color: $color-read;
+    }
   }
 
-  h2 {
+  &__heading {
+    display: flex;
+  }
+
+  &__title {
     margin: 0;
+    margin-right: auto;
+    font-size: $font-size-large;
+    width: calc(100% - 14px);
   }
 
-  p {
-    margin: 5px 0;
+  &__author {
+    margin: 5px 0 16px;
+  }
+
+  &__edit {
+    align-self: flex-start;
+    padding: 3px 0 8px 8px;
+
+    &--icon {
+      height: 10px;
+    }
   }
 
   &__pages {
     font-style: italic;
+    margin: 0;
+  }
+
+  &__progress {
+    margin: 5px 0 0;
   }
 }

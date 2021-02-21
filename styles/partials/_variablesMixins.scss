@@ -1,15 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-$border-radius: 12px;
-$padding: 16px;
+// fonts
+$body-font: "Lato", sans-serif;
+$font-size-regular: 1.6rem;
+$font-size-small: 1.4rem;
+$font-size-large: 2rem;
+
+// padding, margins, border-radius
+$border-radius: 4px;
+$shadow-radius: 4px;
+$padding-small: 4px;
+$padding-medium: 8px;
+$padding-regular: 16px;
+
+// colors
+$white: #fff;
+$lightBlue: #f0f1f4;
+$pink: #e5c7d1;
+$green: #b2bd7e; //unused
+$darkGreen: #6b7649;
+$mediumBlue: #d5d8e2;
+$blueGrey: #343742;
+
+// ui colours
+$color-card: $white;
+$color-bg: $lightBlue;
+$color-shadow: $mediumBlue;
+$color-text: $blueGrey;
+
+$color-reading: $pink;
+$color-read: $darkGreen;
+
+// ui additional styles
+$drop-shadow: drop-shadow(
+  $shadow-radius $shadow-radius $shadow-radius $color-shadow
+);
 
 // Media query mixins
 
 @mixin mq($breakpoint) {
-  $phone: "(max-width: 600px)";
-  $tablet: "(min-width: 650px)";
-  $desktop: "(min-width: 790px)";
+  $phone: "(max-width: 789px)";
+  $tablet: "(min-width: 790px)";
+  $desktop: "(min-width: 1025px)";
 
   @if $breakpoint == phone {
     @media #{$phone} {

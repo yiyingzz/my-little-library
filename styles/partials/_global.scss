@@ -4,12 +4,24 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: "Lato", sans-serif;
+  font-family: $body-font;
+  background-color: $color-bg;
+  color: $color-text;
 }
 
 .wrapper {
-  width: calc(100% - #{$padding} * 2);
+  width: calc(100% - #{$padding-regular} * 2);
   margin: 0 auto;
+
+  @include mq(tablet) {
+    width: calc(100% - #{$padding-regular} * 4);
+    max-width: 1400px;
+  }
+
+  @include mq(desktop) {
+    width: 80%;
+    max-width: 1400px;
+  }
 }
 
 ul,
@@ -34,7 +46,7 @@ h1 {
     display: block;
     width: 65%;
     height: 2px;
-    background-color: black;
+    background-color: $color-text;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -42,19 +54,33 @@ h1 {
   }
 }
 
-nav {
+.nav {
   text-align: center;
 
-  a {
+  &__link {
     margin: 0 10px;
     display: inline-block;
-    border-radius: 15px;
-    border: 2px solid black;
-    color: black;
-    padding: 2px 5px;
+    padding: 2px $padding-small;
     text-decoration: none;
+    border-radius: $border-radius;
+    border: 2px solid $color-text;
+    color: $color-text;
+    background-color: $color-bg;
+    transition: 0.3s all;
 
-    &.nav__add {
+    &:hover,
+    &:focus {
+      color: $color-bg;
+      background-color: $color-text;
+    }
+
+    &--all {
+      @include mq(phone) {
+        display: none;
+      }
+    }
+
+    &--add {
       width: 26px;
       height: 26px;
       border-radius: 50%;
@@ -62,13 +88,13 @@ nav {
     }
 
     &.active {
-      background: black;
-      color: white;
+      background: $color-text;
+      color: $color-bg;
     }
   }
 }
 
-section {
+.nav section {
   margin: 20px 0;
 }
 

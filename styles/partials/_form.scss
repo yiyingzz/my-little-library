@@ -2,6 +2,86 @@
 }
 
 .form {
-  background-color: white;
+  background-color: $color-card;
   display: none;
+  margin-top: $padding-regular;
+  border-radius: $border-radius;
+  filter: $drop-shadow;
+
+  @include mq(tablet) {
+    margin: $padding-regular auto 0;
+    width: 70%;
+    max-width: 600px;
+  }
+
+  @include mq(desktop) {
+    margin: $padding-regular auto 0;
+    max-width: 600px;
+  }
+
+  &__wrapper {
+    padding: 0 $padding-regular $padding-regular;
+  }
+
+  &__close {
+    display: block;
+    padding: $padding-regular 0 0 $padding-regular;
+    margin-left: auto;
+    width: 44px;
+
+    &--icon {
+      width: 12px;
+    }
+  }
+
+  &__set {
+    padding: $padding-medium;
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-small;
+    margin-bottom: $padding-small;
+
+    &--checkbox {
+      padding: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  &__input {
+    display: block;
+    border-radius: $border-radius;
+    border: 1px solid $color-shadow;
+    padding: $padding-medium;
+    width: 100%;
+
+    &--checkbox {
+      padding: 0;
+      margin-left: $padding-medium;
+      display: inline-block;
+      width: auto;
+      cursor: pointer;
+    }
+  }
+
+  &__button {
+    width: 140px;
+    padding: $padding-medium;
+    margin: $padding-medium auto 0;
+    display: block;
+    border-radius: $border-radius;
+    border: 2px solid $color-read;
+    color: $color-read;
+    background-color: $color-card;
+    cursor: pointer;
+    transition: 0.3s all;
+
+    &:hover,
+    &:focus {
+      color: $color-card;
+      background-color: $color-read;
+    }
+  }
 }
