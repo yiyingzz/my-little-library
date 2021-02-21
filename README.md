@@ -1,6 +1,6 @@
 # my little library
 
-A book-tracking app made as part of the [full-stack JavaScript curriculum](https://www.theodinproject.com/courses/javascript/lessons/library) at [The Odin Project](https://www.theodinproject.com).
+A book-tracking app made as part of the The Odin Project's [JavaScript curriculum](https://www.theodinproject.com/courses/javascript). Here are the [project requirements](https://www.theodinproject.com/courses/javascript/lessons/library). The aim was to use object constructors.
 
 ## Functionality
 Users are able to:
