@@ -85,7 +85,57 @@
         </section>
 
         <section id="list">
-          <ul id="booklist" class="list"></ul>
+          <ul id="booklist" class="list">
+            <li class="card">
+              <div class="card__border card__border--read"></div>
+              <div class="card__heading">
+                <h2 class="card__title">The Handmaid's Tale</h2>
+                <!-- <a href="javascript:void(0);" class="card__edit">
+                  <img
+                    src="./assets/two-dots.svg"
+                    class="card__edit--icon"
+                    alt="Edit book info"
+                  />
+                </a> -->
+              </div>
+              <p class="card__author">Margaret Atwood</p>
+
+              <p class="card__pages">200 pages</p>
+
+              <div class="card__modify-container">
+                <p class="card__progress">
+                  Status:
+                  <a href="javascript:void(0);" class="card__progress--update"
+                    >Reading</a
+                  >
+                </p>
+                <div class="card__modify">
+                  <a
+                    href="javascript:void(0);"
+                    class="card__modify--link"
+                    aria-label="Edit book details"
+                    ><img
+                      src="./assets/edit.svg"
+                      class="card__modify--icon"
+                      alt=""
+                  /></a>
+                  <a
+                    href="javascript:void(0);"
+                    class="card__modify--link"
+                    aria-label="Delete book"
+                  >
+                    <img
+                      src="./assets/delete.svg"
+                      class="card__modify--icon"
+                      alt=""
+                  /></a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section id="empty" class="empty">
+          <p>You have no books in your list! Better get reading!</p>
         </section>
       </div>
     </main>

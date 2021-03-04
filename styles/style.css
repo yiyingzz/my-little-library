@@ -375,6 +375,11 @@ h1::after {
   margin: 20px 0;
 }
 
+.empty {
+  text-align: center;
+  display: none;
+}
+
 footer {
   text-align: center;
   margin: 16px 0;
@@ -521,12 +526,6 @@ footer {
   background-color: #b2bd7e;
 }
 
-.card__heading {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .card__title {
   margin: 0;
   margin-right: auto;
@@ -538,22 +537,58 @@ footer {
   margin: 5px 0 16px;
 }
 
-.card__edit {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  padding: 3px 0 8px 8px;
-}
-
-.card__edit--icon {
-  height: 10px;
-}
-
 .card__pages {
   font-style: italic;
   margin: 0;
 }
 
+.card__modify-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .card__progress {
   margin: 5px 0 0;
   cursor: pointer;
+  width: auto;
+}
+
+.card__progress--update {
+  color: #343742;
+}
+
+.card__progress--update:hover, .card__progress--update:focus {
+  color: #b15973;
+}
+
+.card__progress--update-read:hover, .card__progress--update-read:focus {
+  color: #6b7649;
+}
+
+.card__modify {
+  margin-top: 5px;
+  margin-left: auto;
+  text-align: right;
+}
+
+.card__modify--link:hover .card__modify--icon, .card__modify--link:focus .card__modify--icon {
+  -webkit-filter: invert(40%) sepia(24%) saturate(991%) hue-rotate(291deg) brightness(99%) contrast(88%);
+          filter: invert(40%) sepia(24%) saturate(991%) hue-rotate(291deg) brightness(99%) contrast(88%);
+}
+
+.card__modify--link-read:hover .card__modify--icon, .card__modify--link-read:focus .card__modify--icon {
+  -webkit-filter: invert(41%) sepia(28%) saturate(528%) hue-rotate(34deg) brightness(99%) contrast(83%);
+          filter: invert(41%) sepia(28%) saturate(528%) hue-rotate(34deg) brightness(99%) contrast(83%);
+}
+
+.card__modify--icon {
+  height: 20px;
+  margin-left: 8px;
+}
+
+@media (min-width: 1025px) {
+  .card__modify--icon {
+    height: 16px;
+  }
 }

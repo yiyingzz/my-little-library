@@ -18,7 +18,8 @@ $padding-regular: 16px;
 $white: #fff;
 $lightBlue: #f0f1f4;
 $pink: #e5c7d1;
-$green: #b2bd7e; //unused
+$darkPink: #b15973;
+$green: #b2bd7e;
 $darkGreen: #6b7649;
 $mediumBlue: #d5d8e2;
 $blueGrey: #343742;
@@ -29,8 +30,20 @@ $color-bg: $lightBlue;
 $color-shadow: $mediumBlue;
 $color-text: $blueGrey;
 $color-reading: $pink;
+$color-reading-dark: $darkPink;
 $color-read: $green;
+$color-read-dark: $darkGreen;
 $color-button: $darkGreen;
+
+// filtered for svg
+$filter-pink: invert(88%) sepia(13%) saturate(379%) hue-rotate(293deg)
+  brightness(92%) contrast(94%);
+$filter-darkPink: invert(40%) sepia(24%) saturate(991%) hue-rotate(291deg)
+  brightness(99%) contrast(88%);
+$filter-green: invert(78%) sepia(12%) saturate(909%) hue-rotate(30deg)
+  brightness(93%) contrast(89%);
+$filter-darkGreen: invert(41%) sepia(28%) saturate(528%) hue-rotate(34deg)
+  brightness(99%) contrast(83%);
 
 // ui additional styles
 $drop-shadow: drop-shadow(
