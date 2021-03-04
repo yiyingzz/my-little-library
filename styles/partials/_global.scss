@@ -58,7 +58,7 @@ h1 {
   text-align: center;
 
   &__link {
-    margin: 0 10px;
+    margin: 0 $padding-medium;
     display: inline-block;
     padding: 2px $padding-small;
     text-decoration: none;
@@ -74,10 +74,8 @@ h1 {
       background-color: $color-text;
     }
 
-    &--all {
-      @include mq(phone) {
-        display: none;
-      }
+    &--reading {
+      margin-left: 0;
     }
 
     &--add {
@@ -85,6 +83,7 @@ h1 {
       height: 26px;
       border-radius: 50%;
       font-weight: bold;
+      margin-right: 0;
     }
 
     &.active {

@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return book;
     });
     displayBooks("all");
-    // set activeView here (default on load)
     activeView = allLink;
     allLink.classList.add("active");
   }

@@ -337,7 +337,7 @@ h1::after {
 }
 
 .nav__link {
-  margin: 0 10px;
+  margin: 0 8px;
   display: inline-block;
   padding: 2px 4px;
   text-decoration: none;
@@ -354,10 +354,8 @@ h1::after {
   background-color: #343742;
 }
 
-@media (max-width: 759px) {
-  .nav__link--all {
-    display: none;
-  }
+.nav__link--reading {
+  margin-left: 0;
 }
 
 .nav__link--add {
@@ -365,6 +363,7 @@ h1::after {
   height: 26px;
   border-radius: 50%;
   font-weight: bold;
+  margin-right: 0;
 }
 
 .nav__link.active {
@@ -471,14 +470,14 @@ footer {
   background-color: #6b7649;
 }
 
-.category {
+.list {
   display: -ms-grid;
   display: grid;
   grid-gap: 16px;
 }
 
 @media (min-width: 760px) {
-  .category {
+  .list {
     -ms-grid-columns: (1fr)[2];
         grid-template-columns: repeat(2, 1fr);
     -ms-grid-rows: auto;
@@ -487,7 +486,7 @@ footer {
 }
 
 @media (min-width: 1025px) {
-  .category {
+  .list {
     -ms-grid-columns: (1fr)[3];
         grid-template-columns: repeat(3, 1fr);
     -ms-grid-rows: auto;
