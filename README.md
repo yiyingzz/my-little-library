@@ -12,3 +12,4 @@ Users are able to:
 - HTML & CSS (Sass)
 - JavaScript
 - mobile-first design
+- [Fontawesome icons](https://fontawesome.com/)
