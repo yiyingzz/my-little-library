@@ -518,7 +518,7 @@ footer {
 }
 
 .card__border--read {
-  background-color: #6b7649;
+  background-color: #b2bd7e;
 }
 
 .card__heading {
@@ -555,4 +555,5 @@ footer {
 
 .card__progress {
   margin: 5px 0 0;
+  cursor: pointer;
 }

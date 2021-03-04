@@ -1,13 +1,11 @@
 let library = [];
 let activeView = ""; // default is all for desktop, reading for mobile
 
+const list = document.querySelector("#booklist");
 const form = document.querySelector("form");
 const formLink = document.querySelector(".nav__link--add");
-const reading = document.querySelector("#reading");
 const readingLink = document.querySelector(".nav__link--reading");
-const read = document.querySelector("#read");
 const readLink = document.querySelector(".nav__link--read");
-const all = document.querySelector("#all");
 const allLink = document.querySelector(".nav__link--all");
 
 //set up book class
@@ -18,68 +16,57 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-// NEED A WAY TO ADD MULTIPLE METHODS TO Book.prototype --> use class Book & constructor ES6???
-// stackoverflow.com/questions/40337873/adding-multiple-methods-to-a-javascript-prototype
-
 Book.prototype = {
   constructor: Book,
   toggleRead: function () {
     this.isRead = !this.isRead;
+  },
+  deleteBook: function () {
+    console.log("delete");
   }
 };
 
-// this function gets called after user fills out inputs to add new book info (title, author, etc)
-// create new book first, then call addBook function
 function addBookToLibrary() {
   const title = document.querySelector('input[name="title"]').value;
   const author = document.querySelector('input[name="author"]').value;
   const pages = parseInt(document.querySelector('input[name="pages"]').value);
-  const progress = document.querySelector('input[name="progress"]').checked;
-  const newBook = new Book(title, author, pages, progress);
+  const isRead = document.querySelector('input[name="progress"]').checked;
+  const newBook = new Book(title, author, pages, isRead);
   library.push(newBook);
-  // add to localStorage
   localStorage.setItem("books", JSON.stringify(library));
-  displayBooks();
+  displayBooks("all");
 }
 
-// display books
-function displayBooks() {
-  // grab ul (depend on reading or read)
-  // need to clear the ul first otherwise just keeps adding
-  document.getElementById("read").innerHTML = "";
-  document.getElementById("reading").innerHTML = "";
+function filterBooks(category) {
+  let filteredLibrary = [];
+  if (category === "all") {
+    filteredLibrary = library;
+  } else if (category === "reading") {
+    library.forEach((book) => {
+      if (!book.isRead) {
+        filteredLibrary.push(book);
+      }
+    });
+  } else if (category === "read") {
+    library.forEach((book) => {
+      if (book.isRead) {
+        filteredLibrary.push(book);
+      }
+    });
+  }
+  return filteredLibrary;
+}
 
-  // loop through library obj
-  library.forEach((book, index) => {
-    let ul = "";
+function displayBooks(category) {
+  list.innerHTML = "";
+
+  const filteredLibrary = filterBooks(category);
+  filteredLibrary.forEach((book, index) => {
+    const ul = list;
     let isRead = false;
-    // let progressCSS = "card__border--reading";
     if (book.isRead) {
       isRead = true;
-      // progressCSS = "card__border--read";
-      ul = document.getElementById("read");
-    } else {
-      ul = document.getElementById("reading");
     }
-    // build html
-    // let html = `
-
-    //     <h2 class="card__title">${book.title}</h2>
-    //     <p class="card__author">${book.author}</p>
-    //     <p class="card__pages">${book.pages} pages</p>
-    //     <p class="card__progress">${readInfo}</p>
-    //   `;
-
-    // let html = `
-    //   <div class="card__border ${progressCSS}"></div>
-    //     <div class="card__heading">
-    //       <h2 class="card__title">${book.title}</h2>
-    //       <div class="card__edit"></div>
-    //     </div>
-    //     <p class="card__author">${book.author}</p>
-    //     <p class="card__pages">${book.pages} pages</p>
-    //     <p class="card__progress">${isRead}</p>
-    //   `;
     const li = document.createElement("li");
     li.setAttribute("class", "card");
     li.setAttribute("id", index);
@@ -115,18 +102,14 @@ function displayBooks() {
   attachToggleReadEventListener();
 }
 
-document.querySelector("form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  addBookToLibrary();
-});
-
 function attachToggleReadEventListener() {
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
     card.addEventListener("click", function (e) {
       if (e.target.className === "card__progress") {
         library[e.currentTarget.id].toggleRead();
-        displayBooks();
+        localStorage.setItem("books", JSON.stringify(library));
+        displayBooks("all");
       }
     });
   });
@@ -135,31 +118,16 @@ function attachToggleReadEventListener() {
 // rewrite below as one named function that is an evt listener, attach to all 3 nav links, function needs to take in parameter (event, use event target class/id to decide what to show/hide)
 // this is the event listener
 function determineView(e) {
-  if (e.target.dataset.view === "add") {
-    toggleForm();
-  } else {
-    showCategory(e.target.dataset.view);
-    console.log("determine");
-    console.log(activeView);
-    activeView = e.target;
-  }
   const nav = document.getElementsByClassName("nav__link");
   for (let item of nav) {
     item.classList.remove("active");
   }
-  e.target.classList.add("active"); // clicking on form link to close causes this to activate
-  // check if form & if form link is already active, if it is, remove
-}
-
-// this should be a function that runs through the library array and displays the matching category, so the default will always be "all"
-// this also prevents having the categories split when there are multiple (so just have one <ul> to catch everything, and use the nav links as filters, instead of 3 different <ul>?)
-function showCategory(category) {
-  const categories = document.getElementsByClassName("category");
-  for (let item of categories) {
-    item.style.display = "none";
+  if (e.target.dataset.view === "add") {
+    toggleForm();
+  } else {
+    displayBooks(e.target.dataset.view);
+    activeView = e.target;
   }
-  form.style.display = "none";
-  document.getElementById(category).style.display = "grid";
 }
 
 function toggleForm() {
@@ -168,8 +136,6 @@ function toggleForm() {
     form.style.display = "none";
     document.querySelector(".nav__link--add").classList.remove("active");
     activeView.classList.add("active");
-    console.log("toggleform");
-    console.log(activeView);
   } else {
     form.style.display = "block";
   }
@@ -185,19 +151,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    addBookToLibrary();
+  });
   document.querySelector(".form__close").addEventListener("click", toggleForm);
 
   /* check for stored data */
   if (0 < localStorage.length) {
     libraryData = JSON.parse(localStorage.getItem("books"));
+    library = [];
     library = libraryData.map((item) => {
-      const book = new Book(item.title, item.author, item.pages, item.progress);
+      const book = new Book(item.title, item.author, item.pages, item.isRead);
       return book;
     });
-    displayBooks();
+    displayBooks("all");
     // set activeView here (default on load)
-    activeView = readingLink;
-    readingLink.classList.add("active");
+    activeView = allLink;
+    allLink.classList.add("active");
   }
 });
 

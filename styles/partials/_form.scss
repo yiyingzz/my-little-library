@@ -69,8 +69,8 @@
     margin: $padding-medium auto 0;
     display: block;
     border-radius: $border-radius;
-    border: 2px solid $color-read;
-    color: $color-read;
+    border: 2px solid $color-button;
+    color: $color-button;
     background-color: $color-card;
     cursor: pointer;
     transition: 0.3s all;
@@ -78,7 +78,7 @@
     &:hover,
     &:focus {
       color: $color-card;
-      background-color: $color-read;
+      background-color: $color-button;
     }
   }
 }
