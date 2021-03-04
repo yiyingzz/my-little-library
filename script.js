@@ -1,6 +1,6 @@
-let library = [];
-let activeView = "";
-let activeCategory = "all";
+const library = {};
+library.books = [];
+library.count = 0;
 
 const list = document.querySelector("#booklist");
 const form = document.querySelector("form");
@@ -9,14 +9,16 @@ const readingLink = document.querySelector(".nav__link--reading");
 const readLink = document.querySelector(".nav__link--read");
 const allLink = document.querySelector(".nav__link--all");
 const emptyList = document.querySelector("#empty");
+let activeView = allLink;
+let activeCategory = "all";
 
 //set up book class
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages, isRead, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
-  //this.id = id;
+  this.id = id;
 }
 
 Book.prototype = {
@@ -31,25 +33,27 @@ function addBookToLibrary() {
   const author = document.querySelector('input[name="author"]').value;
   const pages = parseInt(document.querySelector('input[name="pages"]').value);
   const isRead = document.querySelector('input[name="progress"]').checked;
-  //const id = idCount;
-  const newBook = new Book(title, author, pages, isRead);
-  library.push(newBook);
-  localStorage.setItem("books", JSON.stringify(library));
+  const id = library.count;
+  const newBook = new Book(title, author, pages, isRead, id);
+  library.books.push(newBook);
+  library.count++;
+  localStorage.setItem("library", JSON.stringify(library));
+  toggleForm();
   displayBooks(activeCategory);
 }
 
 function filterBooks(category) {
   let filteredLibrary = [];
   if (category === "all") {
-    filteredLibrary = library;
+    filteredLibrary = library.books;
   } else if (category === "reading") {
-    library.forEach((book) => {
+    library.books.forEach((book) => {
       if (!book.isRead) {
         filteredLibrary.push(book);
       }
     });
   } else if (category === "read") {
-    library.forEach((book) => {
+    library.books.forEach((book) => {
       if (book.isRead) {
         filteredLibrary.push(book);
       }
@@ -61,10 +65,10 @@ function filterBooks(category) {
 function displayBooks(category) {
   list.innerHTML = "";
 
-  if (0 < library.length) {
+  if (0 < library.books.length) {
     emptyList.style.display = "none";
     const filteredLibrary = filterBooks(category);
-    filteredLibrary.forEach((book, index) => {
+    filteredLibrary.forEach((book) => {
       const ul = list;
       let isRead = false;
       if (book.isRead) {
@@ -72,7 +76,7 @@ function displayBooks(category) {
       }
       const li = document.createElement("li");
       li.setAttribute("class", "card");
-      li.setAttribute("id", index);
+      li.setAttribute("id", book.id);
       const border = document.createElement("div");
       if (isRead) {
         border.setAttribute("class", "card__border card__border--read");
@@ -126,30 +130,26 @@ function displayBooks(category) {
       li.append(divModifyContainer);
       ul.append(li);
     });
-    attachToggleReadEventListener();
+    attachEventListener();
   } else {
     emptyList.style.display = "block";
   }
 }
 
-function attachToggleReadEventListener() {
+function attachEventListener() {
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
     card.addEventListener("click", function (e) {
-      console.log("added click");
-      console.log(e.target.className);
       const progressRegex = /card__progress--update/;
       const deleteRegex = /card__modify--/;
       if (progressRegex.test(e.target.className)) {
-        library[e.currentTarget.id].toggleRead();
-        localStorage.setItem("books", JSON.stringify(library));
-        console.log(localStorage);
+        library.books[e.currentTarget.id].toggleRead();
+        localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
       if (deleteRegex.test(e.target.className)) {
-        library.splice(this.id, 1);
-        localStorage.setItem("books", JSON.stringify(library));
-        console.log(localStorage);
+        library.books.splice(e.currentTarget.id, 1);
+        localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
     });
@@ -167,6 +167,7 @@ function determineView(e) {
     toggleForm();
   } else {
     activeView = e.target;
+    activeView.classList.add("active");
     activeCategory = e.target.dataset.view;
     displayBooks(activeCategory);
   }
@@ -180,6 +181,7 @@ function toggleForm() {
     activeView.classList.add("active");
   } else {
     form.style.display = "block";
+    formLink.classList.add("active");
   }
 }
 
@@ -201,10 +203,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* check for stored data */
   if (0 < localStorage.length) {
-    libraryData = JSON.parse(localStorage.getItem("books"));
-    library = [];
-    library = libraryData.map((item) => {
-      const book = new Book(item.title, item.author, item.pages, item.isRead);
+    libraryData = JSON.parse(localStorage.getItem("library"));
+    library.count = libraryData.count;
+    library.books = [];
+    library.books = libraryData.books.map((item) => {
+      const book = new Book(
+        item.title,
+        item.author,
+        item.pages,
+        item.isRead,
+        item.id
+      );
       return book;
     });
     displayBooks(activeCategory);
@@ -216,5 +225,4 @@ document.addEventListener("DOMContentLoaded", function () {
 // NOTES:
 // need form error handling
 // if title & author exact match for something already in library[], "do you already have this book on your list?" --> parse title & author in lower case to check for matches
-// add delete button to delete books
 // add edit button for editing book info
