@@ -40,8 +40,8 @@ $drop-shadow: drop-shadow(
 // Media query mixins
 
 @mixin mq($breakpoint) {
-  $phone: "(max-width: 759px)";
-  $tablet: "(min-width: 760px)";
+  $phone: "(max-width: 679px)";
+  $tablet: "(min-width: 680px)";
   $desktop: "(min-width: 1025px)";
 
   @if $breakpoint == phone {

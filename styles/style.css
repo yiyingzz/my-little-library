@@ -287,7 +287,7 @@ body {
   margin: 0 auto;
 }
 
-@media (min-width: 760px) {
+@media (min-width: 680px) {
   .wrapper {
     width: calc(100% - 16px * 4);
     max-width: 1400px;
@@ -377,7 +377,8 @@ h1::after {
 
 footer {
   text-align: center;
-  height: 22px;
+  margin: 16px 0;
+  padding-top: 16px;
 }
 
 .form {
@@ -389,7 +390,7 @@ footer {
           filter: drop-shadow(4px 4px 4px #d5d8e2);
 }
 
-@media (min-width: 760px) {
+@media (min-width: 680px) {
   .form {
     margin: 16px auto 0;
     width: 70%;
@@ -476,7 +477,7 @@ footer {
   grid-gap: 16px;
 }
 
-@media (min-width: 760px) {
+@media (min-width: 680px) {
   .list {
     -ms-grid-columns: (1fr)[2];
         grid-template-columns: repeat(2, 1fr);
