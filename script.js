@@ -1,6 +1,21 @@
 const library = {};
-library.books = [];
-library.count = 0;
+library.books = [
+  {
+    title: "The Handmaid's Tale",
+    author: "Margaret Atwood",
+    pages: "314",
+    isRead: true,
+    id: 1
+  },
+  {
+    title: "Grokking Algorithms",
+    author: "Aditya Y. Bhargava",
+    pages: "256",
+    isRead: false,
+    id: 2
+  }
+];
+library.count = 3;
 
 const list = document.querySelector("#booklist");
 const form = document.querySelector("form");
@@ -130,25 +145,37 @@ function displayBooks(category) {
       li.append(divModifyContainer);
       ul.append(li);
     });
-    attachEventListener();
+    attachEventListeners();
   } else {
     emptyList.style.display = "block";
   }
 }
 
-function attachEventListener() {
+function attachEventListeners() {
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
     card.addEventListener("click", function (e) {
       const progressRegex = /card__progress--update/;
       const deleteRegex = /card__modify--/;
       if (progressRegex.test(e.target.className)) {
-        library.books[e.currentTarget.id].toggleRead();
+        let bookIndex = "null";
+        library.books.forEach((book, index) => {
+          if (book.id === parseInt(e.currentTarget.id)) {
+            bookIndex = index;
+          }
+        });
+        library.books[bookIndex].toggleRead();
         localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
       if (deleteRegex.test(e.target.className)) {
-        library.books.splice(e.currentTarget.id, 1);
+        let bookIndex = "null";
+        library.books.forEach((book, index) => {
+          if (book.id === parseInt(e.currentTarget.id)) {
+            bookIndex = index;
+          }
+        });
+        library.books.splice(bookIndex, 1);
         localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
@@ -156,20 +183,22 @@ function attachEventListener() {
   });
 }
 
-// rewrite below as one named function that is an evt listener, attach to all 3 nav links, function needs to take in parameter (event, use event target class/id to decide what to show/hide)
-// this is the event listener
 function determineView(e) {
   const nav = document.getElementsByClassName("nav__link");
   for (let item of nav) {
     item.classList.remove("active");
   }
-  if (e.target.dataset.view === "add") {
-    toggleForm();
-  } else {
+  if (e.target.dataset.view !== "add") {
     activeView = e.target;
     activeView.classList.add("active");
     activeCategory = e.target.dataset.view;
     displayBooks(activeCategory);
+    if (form.style.display === "block") {
+      // close form if it's already open
+      toggleForm();
+    }
+  } else {
+    toggleForm();
   }
 }
 
@@ -216,13 +245,14 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       return book;
     });
-    displayBooks(activeCategory);
-    activeView = allLink;
-    allLink.classList.add("active");
   }
+  displayBooks(activeCategory);
+  activeView = allLink;
+  allLink.classList.add("active");
 });
 
 // NOTES:
 // need form error handling
 // if title & author exact match for something already in library[], "do you already have this book on your list?" --> parse title & author in lower case to check for matches
 // add edit button for editing book info
+// fix menu issue when the form is closed through + button
