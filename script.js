@@ -76,12 +76,13 @@ function validateForm() {
   }
 
   if (!form.errors.title && !form.errors.author && !form.errors.pages) {
-    return addBookToLibrary(
+    addBookToLibrary(
       form.title.value.trim(),
       form.author.value.trim(),
       form.pages.value,
       form.isRead.checked
     );
+    clearForm();
   }
   return false;
 }
@@ -90,6 +91,13 @@ function clearErrors(elem) {
   elem.classList.remove("form__input--error");
   elem.nextElementSibling.style.display = "none";
   form.errors[elem.id] = false;
+}
+
+function clearForm() {
+  form.title.value = "";
+  form.author.value = "";
+  form.pages.value = "";
+  form.isRead.checked = false;
 }
 
 function addBookToLibrary(title, author, pages, isRead) {

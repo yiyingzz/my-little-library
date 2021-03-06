@@ -276,10 +276,16 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-family: "Lato", sans-serif;
   background-color: #f0f1f4;
   color: #343742;
+}
+
+@media (min-width: 1025px) {
+  body {
+    font-size: 1.6rem;
+  }
 }
 
 .wrapper {
@@ -309,8 +315,13 @@ li {
 
 .title-container {
   text-align: center;
-  margin-bottom: 8px;
   height: 80px;
+}
+
+@media (min-width: 1025px) {
+  .title-container {
+    margin-bottom: 8px;
+  }
 }
 
 h1 {
@@ -376,12 +387,12 @@ h1::after {
 }
 
 main {
-  min-height: calc( 100vh - 114px - 65px - 16px);
+  min-height: calc( 100vh - 106px - 64px - 16px);
 }
 
 @media (min-width: 1025px) {
   main {
-    min-height: calc(100vh - 114px - 65px - 32px);
+    min-height: calc(100vh - 114px - 64px - 32px);
   }
 }
 
@@ -551,8 +562,14 @@ footer {
 .card__title {
   margin: 0;
   margin-right: auto;
-  font-size: 2rem;
+  font-size: 1.6rem;
   width: calc(100% - 14px);
+}
+
+@media (min-width: 1025px) {
+  .card__title {
+    font-size: 2rem;
+  }
 }
 
 .card__author {
@@ -605,12 +622,12 @@ footer {
 }
 
 .card__modify--icon {
-  height: 20px;
+  height: 16px;
   margin-left: 8px;
 }
 
 @media (min-width: 1025px) {
   .card__modify--icon {
-    height: 16px;
+    height: 18px;
   }
 }

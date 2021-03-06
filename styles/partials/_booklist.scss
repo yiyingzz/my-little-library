@@ -40,8 +40,12 @@
   &__title {
     margin: 0;
     margin-right: auto;
-    font-size: $font-size-large;
+    font-size: $font-size-regular;
     width: calc(100% - 14px);
+
+    @include mq(desktop) {
+      font-size: $font-size-large;
+    }
   }
 
   &__author {
@@ -103,11 +107,11 @@
     }
 
     &--icon {
-      height: 20px;
+      height: 16px;
       margin-left: $padding-medium;
 
       @include mq(desktop) {
-        height: 16px;
+        height: 18px;
       }
     }
   }
