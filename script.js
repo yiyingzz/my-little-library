@@ -238,7 +238,7 @@ function determineView(e) {
     activeView.classList.add("active");
     activeCategory = e.target.dataset.view;
     displayBooks(activeCategory);
-    if (form.style.display === "block") {
+    if (form.form.style.display === "block") {
       // close form if it's already open
       toggleForm();
     }
@@ -306,6 +306,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // NOTES:
-// need form error handling
 // if title & author exact match for something already in library[], "do you already have this book on your list?" --> parse title & author in lower case to check for matches
 // add edit button for editing book info
