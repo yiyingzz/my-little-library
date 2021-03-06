@@ -17,8 +17,21 @@ library.books = [
 ];
 library.count = 3;
 
+const form = {
+  form: document.querySelector("form"),
+  title: document.querySelector('input[id="title"]'),
+  author: document.querySelector('input[id="author"]'),
+  pages: document.querySelector('input[id="pages"]'),
+  isRead: document.querySelector('input[id="progress"]'),
+  link: document.querySelector(".nav__link--add"),
+  errors: {
+    title: false,
+    author: false,
+    pages: false
+  }
+};
+
 const list = document.querySelector("#booklist");
-const form = document.querySelector("form");
 const formLink = document.querySelector(".nav__link--add");
 const readingLink = document.querySelector(".nav__link--reading");
 const readLink = document.querySelector(".nav__link--read");
@@ -43,11 +56,43 @@ Book.prototype = {
   }
 };
 
-function addBookToLibrary() {
-  const title = document.querySelector('input[name="title"]').value;
-  const author = document.querySelector('input[name="author"]').value;
-  const pages = parseInt(document.querySelector('input[name="pages"]').value);
-  const isRead = document.querySelector('input[name="progress"]').checked;
+function validateForm() {
+  if (form.title.value.trim() == false) {
+    form.errors.title = true;
+    form.title.classList.add("form__input--error");
+    form.title.nextElementSibling.style.display = "block";
+  }
+
+  if (form.author.value.trim() == false) {
+    form.errors.author = true;
+    form.author.classList.add("form__input--error");
+    form.author.nextElementSibling.style.display = "block";
+  }
+
+  if (form.pages.value.trim() === "" || isNaN(Number(form.pages.value))) {
+    form.errors.pages = true;
+    form.pages.classList.add("form__input--error");
+    form.pages.nextElementSibling.style.display = "block";
+  }
+
+  if (!form.errors.title && !form.errors.author && !form.errors.pages) {
+    return addBookToLibrary(
+      form.title.value.trim(),
+      form.author.value.trim(),
+      form.pages.value,
+      form.isRead.checked
+    );
+  }
+  return false;
+}
+
+function clearErrors(elem) {
+  elem.classList.remove("form__input--error");
+  elem.nextElementSibling.style.display = "none";
+  form.errors[elem.id] = false;
+}
+
+function addBookToLibrary(title, author, pages, isRead) {
   const id = library.count;
   const newBook = new Book(title, author, pages, isRead, id);
   library.books.push(newBook);
@@ -203,14 +248,13 @@ function determineView(e) {
 }
 
 function toggleForm() {
-  const form = document.querySelector("form");
-  if (form.style.display === "block") {
-    form.style.display = "none";
+  if (form.form.style.display === "block") {
+    form.form.style.display = "none";
     document.querySelector(".nav__link--add").classList.remove("active");
     activeView.classList.add("active");
   } else {
-    form.style.display = "block";
-    formLink.classList.add("active");
+    form.form.style.display = "block";
+    form.link.classList.add("active");
   }
 }
 
@@ -224,11 +268,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.querySelector("form").addEventListener("submit", function (e) {
+  form.form.addEventListener("submit", function (e) {
     e.preventDefault();
-    addBookToLibrary();
+    validateForm();
   });
   document.querySelector(".form__close").addEventListener("click", toggleForm);
+
+  form.title.addEventListener("input", function () {
+    clearErrors(this);
+  });
+  form.author.addEventListener("input", function () {
+    clearErrors(this);
+  });
+  form.pages.addEventListener("input", function () {
+    clearErrors(this);
+  });
 
   /* check for stored data */
   if (0 < localStorage.length) {
@@ -255,4 +309,3 @@ document.addEventListener("DOMContentLoaded", function () {
 // need form error handling
 // if title & author exact match for something already in library[], "do you already have this book on your list?" --> parse title & author in lower case to check for matches
 // add edit button for editing book info
-// fix menu issue when the form is closed through + button

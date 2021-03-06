@@ -35,6 +35,13 @@
     padding: $padding-medium;
   }
 
+  &__error {
+    display: none;
+    font-size: $font-size-small;
+    background-color: $color-error-light;
+    padding: $padding-small;
+  }
+
   &__label {
     display: block;
     font-size: $font-size-small;
@@ -53,6 +60,10 @@
     border: 1px solid $color-shadow;
     padding: $padding-medium;
     width: 100%;
+
+    &--error {
+      border: 1px solid $color-error;
+    }
 
     &--checkbox {
       padding: 0;

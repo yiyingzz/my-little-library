@@ -429,6 +429,13 @@ footer {
   padding: 8px;
 }
 
+.form__error {
+  display: none;
+  font-size: 1.4rem;
+  background-color: #e5c7d1;
+  padding: 4px;
+}
+
 .form__label {
   display: block;
   font-size: 1.4rem;
@@ -447,6 +454,10 @@ footer {
   border: 1px solid #d5d8e2;
   padding: 8px;
   width: 100%;
+}
+
+.form__input--error {
+  border: 1px solid #b15973;
 }
 
 .form__input--checkbox {
