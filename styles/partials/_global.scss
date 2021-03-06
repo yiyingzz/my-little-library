@@ -30,7 +30,7 @@ li {
   padding-left: 0;
 }
 
-header {
+.title-container {
   text-align: center;
   margin-bottom: 8px;
   height: 80px;
@@ -97,6 +97,16 @@ h1 {
   margin: 20px 0;
 }
 
+main {
+  min-height: calc(
+    100vh - 114px - 65px - 16px
+  ); // minus header, footer, padding
+
+  @include mq(desktop) {
+    min-height: calc(100vh - 114px - 65px - 32px);
+  }
+}
+
 .empty {
   text-align: center;
   display: none;
@@ -106,4 +116,5 @@ footer {
   text-align: center;
   margin: $padding-regular 0;
   padding-top: $padding-regular;
+  font-size: $font-size-small;
 }
