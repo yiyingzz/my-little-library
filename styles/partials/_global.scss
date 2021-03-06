@@ -86,11 +86,16 @@ h1 {
     }
 
     &--add {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       font-weight: bold;
       margin-right: 0;
+
+      @include mq(desktop) {
+        width: 26px;
+        height: 26px;
+      }
     }
 
     &.active {

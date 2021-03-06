@@ -370,11 +370,18 @@ h1::after {
 }
 
 .nav__link--add {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   font-weight: bold;
   margin-right: 0;
+}
+
+@media (min-width: 1025px) {
+  .nav__link--add {
+    width: 26px;
+    height: 26px;
+  }
 }
 
 .nav__link.active {
