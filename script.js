@@ -1,5 +1,4 @@
-const library = {};
-library.books = [
+let library = [
   {
     title: "The Handmaid's Tale",
     author: "Margaret Atwood",
@@ -15,7 +14,6 @@ library.books = [
     id: 2
   }
 ];
-library.count = 3;
 
 const form = {
   form: document.querySelector("form"),
@@ -40,7 +38,7 @@ const emptyList = document.querySelector("#empty");
 let activeView = allLink;
 let activeCategory = "all";
 
-//set up book class
+//set up book object constructor
 function Book(title, author, pages, isRead, id) {
   this.title = title;
   this.author = author;
@@ -87,7 +85,7 @@ function validateForm() {
   return false;
 }
 
-function clearErrors(elem) {
+function clearError(elem) {
   elem.classList.remove("form__input--error");
   elem.nextElementSibling.style.display = "none";
   form.errors[elem.id] = false;
@@ -101,10 +99,10 @@ function clearForm() {
 }
 
 function addBookToLibrary(title, author, pages, isRead) {
-  const id = library.count;
+  const date = new Date();
+  const id = date.toISOString();
   const newBook = new Book(title, author, pages, isRead, id);
-  library.books.push(newBook);
-  library.count++;
+  library.push(newBook);
   localStorage.setItem("library", JSON.stringify(library));
   toggleForm();
   displayBooks(activeCategory);
@@ -113,15 +111,15 @@ function addBookToLibrary(title, author, pages, isRead) {
 function filterBooks(category) {
   let filteredLibrary = [];
   if (category === "all") {
-    filteredLibrary = library.books;
+    filteredLibrary = library;
   } else if (category === "reading") {
-    library.books.forEach((book) => {
+    library.forEach((book) => {
       if (!book.isRead) {
         filteredLibrary.push(book);
       }
     });
   } else if (category === "read") {
-    library.books.forEach((book) => {
+    library.forEach((book) => {
       if (book.isRead) {
         filteredLibrary.push(book);
       }
@@ -133,7 +131,7 @@ function filterBooks(category) {
 function displayBooks(category) {
   list.innerHTML = "";
 
-  if (0 < library.books.length) {
+  if (0 < library.length) {
     emptyList.style.display = "none";
     const filteredLibrary = filterBooks(category);
     filteredLibrary.forEach((book) => {
@@ -212,23 +210,23 @@ function attachEventListeners() {
       const deleteRegex = /card__modify--/;
       if (progressRegex.test(e.target.className)) {
         let bookIndex = "null";
-        library.books.forEach((book, index) => {
-          if (book.id === parseInt(e.currentTarget.id)) {
+        library.forEach((book, index) => {
+          if (book.id === e.currentTarget.id) {
             bookIndex = index;
           }
         });
-        library.books[bookIndex].toggleRead();
+        library[bookIndex].toggleRead();
         localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
       if (deleteRegex.test(e.target.className)) {
         let bookIndex = "null";
-        library.books.forEach((book, index) => {
-          if (book.id === parseInt(e.currentTarget.id)) {
+        library.forEach((book, index) => {
+          if (book.id === e.currentTarget.id) {
             bookIndex = index;
           }
         });
-        library.books.splice(bookIndex, 1);
+        library.splice(bookIndex, 1);
         localStorage.setItem("library", JSON.stringify(library));
         displayBooks(activeCategory);
       }
@@ -258,6 +256,10 @@ function determineView(e) {
 function toggleForm() {
   if (form.form.style.display === "block") {
     form.form.style.display = "none";
+    clearForm();
+    clearError(form.title);
+    clearError(form.author);
+    clearError(form.pages);
     document.querySelector(".nav__link--add").classList.remove("active");
     activeView.classList.add("active");
   } else {
@@ -283,21 +285,20 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".form__close").addEventListener("click", toggleForm);
 
   form.title.addEventListener("input", function () {
-    clearErrors(this);
+    clearError(this);
   });
   form.author.addEventListener("input", function () {
-    clearErrors(this);
+    clearError(this);
   });
   form.pages.addEventListener("input", function () {
-    clearErrors(this);
+    clearError(this);
   });
 
   /* check for stored data */
   if (0 < localStorage.length) {
     libraryData = JSON.parse(localStorage.getItem("library"));
-    library.count = libraryData.count;
-    library.books = [];
-    library.books = libraryData.books.map((item) => {
+    library = [];
+    library = libraryData.map((item) => {
       const book = new Book(
         item.title,
         item.author,
