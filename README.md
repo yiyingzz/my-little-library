@@ -6,6 +6,7 @@ A book-tracking app made as part of the The Odin Project's [JavaScript curriculu
 Users are able to:
 - Add new books and mark them as in progress (reading) or completed (read)
 - Toggle "reading" or "read" status on books
+- Delete books from library
 - Data is saved in local storage
 
 ## Made with
