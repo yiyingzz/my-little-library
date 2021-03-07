@@ -1,5 +1,7 @@
 # my little library
 
+[See it live!](https://yiyingzz.github.io/my-little-library/)
+
 A book-tracking app made as part of the The Odin Project's [JavaScript curriculum](https://www.theodinproject.com/courses/javascript). Here are the [project requirements](https://www.theodinproject.com/courses/javascript/lessons/library). The aim was to use object constructors.
 
 ## Functionality
